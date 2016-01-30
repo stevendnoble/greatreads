@@ -10,7 +10,7 @@ var PassageSchema = new Schema({
     type: String,
     required: true
   },
-  submitted_by: String
+  submittedBy: String
 });
 
 var Passage = mongoose.model('Passage', PassageSchema);

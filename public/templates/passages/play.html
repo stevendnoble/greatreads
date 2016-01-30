@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4">
+    <h1><strong>Directions:</strong></h1>
+    <hr>
+    <h3>Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</h3>
+    <h3>Remember that if you want your name to be linked to the passage that you need to enter it in "Who's Libbin?"</h3>
+  </div>
+  <div class="col-md-8">
+    <h1>&nbsp;</h1>
+    <hr>
+    <form ng-submit="submitResponse()">
+      <div ng-repeat="word in wordsToReplace">
+        <div class="row form-group">
+          <div class="col-md-6">
+            <h3 class="text-right no-margin">
+              {{ word.tag.definition }}:
+            </h3>
+          </div>
+          <div class="col-md-6">
+            <h3 class="no-margin"><input type="text" class="underline" ng-model="word.replacement"></h3>
+          </div>
+        </div>
+      </div>      
+      <button type="submit" class="btn btn-block btn-warning">Generate Story</button>
+    </form>
+  </div>
+  <!-- {{wordsToReplace}} 
+  {"wordIndex":91,
+  "word":"that",
+  "tag":{"definition":"Preposition","examples":"of,in,by"},
+  "replacement":"in"} -->
+</div>

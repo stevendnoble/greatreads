@@ -1,0 +1,18 @@
+#navbar-margin {
+  margin-top: 70px;
+}
+
+.btn-passage {
+  margin-bottom: 5px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.underline {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid black;
+}

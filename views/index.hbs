@@ -23,12 +23,20 @@
   <!-- ngResource -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
 
+  <!-- part of speech scripts
+  <script type="text/javascript" src="scripts/lexer.js"></script>
+  <script type="text/javascript" src="scripts/lexicon.js"></script>
+  <script type="text/javascript" src="scripts/POSTagger.js"></script> -->
+
   <!-- custom script -->
   <script type="text/javascript" src="scripts/app.js"></script>
+
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
   
   <title>Bad-Libs</title>
 </head>
-<body>
+<body ng-controller="MainCtrl">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -45,13 +53,22 @@
           <li><a href="/passages">Find-a-Story</a></li>
           <li><a href="/newpassage">Create-a-Story</a></li>
           <li><a href="/stories">Read-a-Story</a></li>
+          <li><a href="/">Try-a-Story</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">Get Started</a></li>
+          <li>
+          <a>Who's Libbin? <input type="text" ng-model="username", placeholder="Username" autofocus>
+          </a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
-  <div ng-view></div>
+  <div class="container" id="navbar-margin">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div ng-view></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -12,6 +12,8 @@
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
     "hbs": "^4.0.0",
-    "mongoose": "^4.3.7"
+    "mongoose": "^4.3.7",
+    "pos": "^0.3.0",
+    "request": "^2.69.0"
   }
 }
