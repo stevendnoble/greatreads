@@ -159,9 +159,18 @@ var partsOfSpeech = {
 app.controller('PassageShowCtrl', ['$scope', '$location', '$routeParams', 'Passage',
   function ($scope, $location, $routeParams, Passage) {
     var passageId = $routeParams.id;
+    $scope.response = {
+      username: $scope.username,
+      passage: passageId,
+      replacements: []
+    };
+    var words;
     Passage.get({ id: passageId },
       function (data) {
-        var words = data.passage.text.split(' ');
+        console.log(data);
+        $scope.title = data.passage.title;
+        words = data.passage.text.split(' ');
+        $scope.passageWords = words;
         $scope.wordsToReplace = data.wordsToReplace.map(function(item) {
           item.tag = partsOfSpeech[item.tag];
           return item;
@@ -173,7 +182,13 @@ app.controller('PassageShowCtrl', ['$scope', '$location', '$routeParams', 'Passa
     );
 
     $scope.submitResponse = function() {
-
+      $scope.showResponse = true;
+      $scope.wordsToReplace.forEach(function(word, index) {
+        $scope.response.replacements.push({ wordIndex: word.wordIndex, newWord: word.replacement });
+        // $scope.passageWords[word.wordIndex] = '"<span class="replacement">'+word.replacement+'</span>"';
+        $scope.passageWords[word.wordIndex] = word.replacement.toUpperCase();
+      });
+      $scope.filledInStory = $scope.passageWords.join(' ');
     };
   }
 ]);

@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var ResponseSchema = new Schema({
   username: String,
-  replacement: [{
+  replacements: [{
     wordIndex: {
       type: Number,
       required: true
