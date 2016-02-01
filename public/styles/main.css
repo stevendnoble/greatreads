@@ -20,4 +20,10 @@
 .replacement {
   color: red;
   font-weight: bolder;
+  text-decoration: underline;
+  width: 30px;
+}
+
+h3.story {
+  line-height: 150%;
 }

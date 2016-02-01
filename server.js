@@ -69,7 +69,6 @@ function shuffle(array) {
 var ACCEPTABLE_POS = ['CD', 'IN', 'JJ', 'JJR', 'JJS', 'NN', 'NNP', 'NNPS', 'NNS', 'PP$', 'PRP', 'RB', 'RBR', 'RBS', 'UH', 'VB', 'VBD', 'VBG', 'VBP', 'VBZ'];
 
 app.get('/api/passages/:id', function (req, res) {
-  console.log(req.params.id);
   var passageId = req.params.id;
   Passage.findOne({ _id: passageId }, function (err, foundPassage) {
     if (err) {
@@ -94,7 +93,6 @@ app.get('/api/passages/:id', function (req, res) {
         }
         index++;
       }
-      console.log(wordsToReplace);
       res.json({ passage: foundPassage, wordsToReplace: wordsToReplace });
     }
   });
@@ -106,17 +104,31 @@ app.get('/api/passages/:id', function (req, res) {
 // });
 
 app.get('/api/responses', function (req, res) {
-  // ...
+  Response.find()
+    .populate('passage')
+    .exec(function (err, allResponses) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(allResponses);
+      }
+    }
+  );
 });
 
 app.post('/api/responses', function (req, res) {
-  // ...
+  var newResponse = new Response(req.body);
+  newResponse.save(function (err, savedResponse) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json(savedResponse);
+    }
+  });
 });
 
-app.get('/api/responses/:id', function (req, res) {
-  // ...
-});
-
+// app.get('/api/responses/:id', function (req, res) {
+// });
 // app.put('/api/responses/:id', function (req, res) {
 // });
 // app.delete('/api/responses/:id', function (req, res) {
@@ -126,7 +138,6 @@ app.get('/api/responses/:id', function (req, res) {
 app.get('*', function (req, res) {
   res.render('index');
 });
-
 
 // listen on port 3000
 app.listen(3000, function() {

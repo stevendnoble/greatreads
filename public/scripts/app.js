@@ -1,5 +1,5 @@
 // app declaration
-var app = angular.module('badlibsApp', ['ngRoute', 'ngResource']);
+var app = angular.module('badlibsApp', ['ngRoute', 'ngResource', 'ngSanitize']);
 
 // routes
 app.config(['$routeProvider', '$locationProvider',
@@ -25,6 +25,10 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'templates/responses/index.html',
         controller: 'ResponsesCtrl'
       })
+      .when('/randomstory', {
+        templateUrl: 'templates/passages/play.html',
+        controller: 'PassageShowCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -39,6 +43,10 @@ app.config(['$routeProvider', '$locationProvider',
 // factories
 app.factory('Passage', ['$resource', function ($resource) {
   return $resource('/api/passages/:id', { id: '@_id' });
+}]);
+
+app.factory('Response', ['$resource', function ($resource) {
+  return $resource('/api/responses/:id', { id: '@_id' });
 }]);
 
 // controllers
@@ -60,6 +68,8 @@ app.controller('PassagesCtrl', ['$scope', '$location', 'Passage',
 
     $scope.savePassage = function() {
       var passageData = $scope.newPassage;
+      // check passage for non-word characters
+      // if more than one space between sentences, gsub
       // check submittedBy
       // if (passageData.submittedBy ===)
       Passage.save(passageData,
@@ -71,7 +81,8 @@ app.controller('PassagesCtrl', ['$scope', '$location', 'Passage',
         }
       );
     };
-}]);
+  }
+]);
 
 var partsOfSpeech = {
   CD: {
@@ -156,43 +167,89 @@ var partsOfSpeech = {
   }
 };
 
-app.controller('PassageShowCtrl', ['$scope', '$location', '$routeParams', 'Passage',
-  function ($scope, $location, $routeParams, Passage) {
-    var passageId = $routeParams.id;
-    $scope.response = {
-      username: $scope.username,
-      passage: passageId,
-      replacements: []
-    };
-    var words;
-    Passage.get({ id: passageId },
-      function (data) {
-        console.log(data);
-        $scope.title = data.passage.title;
-        words = data.passage.text.split(' ');
-        $scope.passageWords = words;
-        $scope.wordsToReplace = data.wordsToReplace.map(function(item) {
-          item.tag = partsOfSpeech[item.tag];
-          return item;
-        });
-      },
-      function (error) {
-        // Error handling
-      }
-    );
+function buildStory(passage, replacements) {
+  var printPassage = passage.split(' ');
+  var readPassage = passage.split(' ');
+  replacements.forEach(function (word, index) {
+    printPassage[word.wordIndex] = '<span class="replacement">&nbsp;&nbsp;'+word.newWord+'&nbsp;&nbsp;</span>';
+    readPassage[word.wordIndex] = word.newWord;
+  });
+  printPassage = printPassage.join(' ');
+  readPassage = readPassage.join(' ');
+  return { print: printPassage, read: readPassage };
+}
 
-    $scope.submitResponse = function() {
-      $scope.showResponse = true;
-      $scope.wordsToReplace.forEach(function(word, index) {
-        $scope.response.replacements.push({ wordIndex: word.wordIndex, newWord: word.replacement });
-        // $scope.passageWords[word.wordIndex] = '"<span class="replacement">'+word.replacement+'</span>"';
-        $scope.passageWords[word.wordIndex] = word.replacement.toUpperCase();
+
+app.controller('PassageShowCtrl', ['$scope', '$location', '$routeParams', 'Passage', 'Response',
+  function ($scope, $location, $routeParams, Passage, Response) {
+    var passageId;
+
+    if ($routeParams.id) {
+      passageId = $routeParams.id;
+      Passage.get({ id: passageId },
+        function (data) {
+          $scope.passage = data.passage;
+          $scope.wordsToReplace = data.wordsToReplace.map(function(item) {
+            item.tag = partsOfSpeech[item.tag];
+            return item;
+          });
+        }
+      );
+    } else {
+      Passage.query(function (passageArray) {
+        var randomIndex = Math.floor(passageArray.length * Math.random());
+        passageId = passageArray[randomIndex]._id;
+        $location.path('/passages/' + passageId);
       });
-      $scope.filledInStory = $scope.passageWords.join(' ');
+    }
+
+    $scope.playStory = function (title, story) {
+      var playString = title + ', ' + story;
+      responsiveVoice.speak(playString);
+    };
+
+    $scope.generateResponse = function () {
+      $scope.showResponse = true;
+      $scope.wordsToReplace.forEach(function(item) {
+        delete item.word;
+        delete item.tag;
+      });
+      $scope.filledInStory = buildStory($scope.passage.text, $scope.wordsToReplace);
+    };
+
+    $scope.saveResponse = function () {
+      var responseData = {
+        username: $scope.username,
+        passage: passageId,
+        replacements: $scope.wordsToReplace
+      };
+      Response.save(responseData,
+        function (savedResponse) {
+          $location.path('/stories');
+        },
+        function(error) {
+          // Error handling
+        }
+      );
     };
   }
 ]);
 
-app.controller('ResponsesCtrl', ['$scope', function ($scope) {
-  $scope.test = "Welcome to the responses homepage!";
+app.controller('ResponsesCtrl', ['$scope', 'Passage', 'Response',
+  function ($scope, Passage, Response) {
+  $scope.responses = [];
+  Response.query(function (data) {
+    data.forEach(function(item) {
+      item.filledInStory = buildStory(item.passage.text, item.replacements);
+      $scope.responses.push(item); 
+    });
+  });
+
+  $scope.playStory = function (title, story) {
+    var playString = title + ', ' + story;
+    responsiveVoice.speak(playString);
+  };
 }]);
+
+
+
