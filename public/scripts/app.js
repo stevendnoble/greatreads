@@ -1,5 +1,5 @@
 // app declaration
-var app = angular.module('greatReadsApp', ['ngRoute', 'ngResource', 'ngSanitize']);
+var app = angular.module('wordWizzerdApp', ['ngRoute', 'ngResource', 'ngSanitize']);
 
 // routes
 app.config(['$routeProvider', '$locationProvider',
@@ -229,7 +229,7 @@ function buildStoryWithMisspellings (passage, words) {
 
 // controllers
 app.controller('MainCtrl', ['$scope', function ($scope) {
-  $scope.username = "random user";
+  $scope.username = 'random user';
 
   $scope.playStory = function (title, story, voice) {
     var playString = title + ', ' + story;
@@ -242,17 +242,14 @@ app.controller('HomeCtrl', ['$scope', '$location', 'Passage',
     $scope.homeTest = "Welcome to the homepage!";
 
     $scope.savePassage = function() {
+      if ($scope.username != 'random user') {
+        $scope.newPassage.submittedBy = $scope.username;
+      }
       var passageData = $scope.newPassage;
-      // check passage for non-word characters
-      // if more than one space between sentences, gsub
-      // check submittedBy
-      // if (passageData.submittedBy ===)
       Passage.save(passageData,
         function (savedPassage) {
-          $location.path('/inject-a-word/passages/' + savedPassage._id);
-        },
-        function(error) {
-          // Error handling
+          // $location.path('/inject-a-word/passages/' + savedPassage._id);
+          $scope.newPassage = {};
         }
       );
     };
@@ -365,7 +362,6 @@ app.controller('UnscramblePassageShowCtrl', ['$scope', '$location', '$routeParam
       });
     } else {
       Passage.query(function (passageArray) {
-        console.log(passageArray);
         var randomIndex = Math.floor(passageArray.length * Math.random());
         passageId = passageArray[randomIndex]._id;
         $location.path('/unscramble-a-word/passages/' + passageId);
@@ -403,8 +399,6 @@ app.controller('UnscramblePassageShowCtrl', ['$scope', '$location', '$routeParam
       var counter = 0;
       $scope.seconds += 1;
       for (var key in $scope.userWords) {
-        console.log('key', key, 'value', $scope.userWords[key]);
-        console.log('index', $scope.checkWords.indexOf($scope.userWords[key]));
         if ($scope.checkWords.indexOf($scope.userWords[key]) !== -1) {
           counter += 1;
         }
@@ -431,7 +425,6 @@ app.controller('ProofreadPassageShowCtrl', ['$scope', '$location', '$routeParams
     if ($routeParams.id) {
       passageId = $routeParams.id;
       Passage.get({ id: passageId }, function(data) { 
-        console.log(data);
         $scope.passage = data.passage;
         $scope.totalQuestions = data.totalQuestions;
         $scope.correctSpellings = {};
@@ -484,7 +477,6 @@ app.controller('CompletePassageShowCtrl', ['$scope', '$location', '$routeParams'
       passageId = $routeParams.id;
       Passage.get({ id: passageId },
         function (data) {
-          console.log(data);
           $scope.passage = data.passage;
           $scope.injectWords = data.injectWords.map(function(item) {
             item.tag = partsOfSpeech[item.tag];

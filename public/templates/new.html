@@ -6,7 +6,7 @@
             <h1>Add a Story</h1>
             <hr>
             <form ng-submit="savePassage()">
-              <div ng-if="username==='random user'" class="form-group">
+              <div ng-show="username==='random user'" class="form-group">
                 <input type="text" class="form-control" ng-model="newPassage.submittedBy" placeholder="If you want credit, put in a username.">
               </div>
               <div class="form-group">

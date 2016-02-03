@@ -6,12 +6,14 @@
             <div class="well">
               <h2 class="text-center"><strong>Unscramble-a-Word</strong></h2>
               <hr>
-              <h3><strong>Directions:</strong>  Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</h3>
+              <h3><strong>Directions:</strong></h3>
+              <h4>Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</h4>
               <hr>
-              <h2 class="text-left"><strong>Results:</strong></h2>
-              <h3>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</h3>
-              <h3>Correct: {{ unscrambledWords }}</h3>
-              <h3>Time: {{seconds}} seconds</h3>
+              <h3 class="text-left"><strong>Results:</strong></h3>
+              <h4>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</h4>
+              <h4>Correct: {{ unscrambledWords }}</h4>
+              <h4>Time: {{seconds}} seconds</h4>
+              <h4>Score: {{ 3 * unscrambledWords - totalQuestions }}</h4>
             </div>
           </div>
           <div class="col-md-8">

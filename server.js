@@ -27,7 +27,7 @@ app.set('view engine', 'hbs');
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/madlibs'
+  'mongodb://localhost/wordwizzerd'
 );
 
 // API routes
@@ -44,8 +44,8 @@ app.get('/api/passages', function (req, res) {
 
 app.post('/api/passages', function (req, res) {
   var newPassage = new Passage(req.body);
-  newPassage = newPassage.replace(/\n/g, ' ');
-  newPassage = newPassage.replace(/\s\s+/g, ' ');
+  newPassage.text = newPassage.text.replace(/\n/g, ' ');
+  newPassage.text = newPassage.text.replace(/\s\s+/g, ' ');
   newPassage.save(function (err, savedPassage) {
     if (err) {
       res.status(500).json({ error: err.message });
