@@ -43,8 +43,8 @@ module.exports = [
   },
   {
     _id: 8,
-    title: "",
-    text: "",
+    title: "Adventures of Huckleberry Finn by Mark Twain",
+    text: "Her sister, Miss Watson, a tolerable slim old maid, with goggles on, had just come to live with her, and took a set at me now with a spelling-book. She worked me middling hard for about an hour, and then the widow made her ease up. I couldn't stood it much longer. Then for an hour it was deadly dull, and I was fidgety. Miss Watson would say, 'Don't put your feet up there, Huckleberry;' and 'Don't scrunch up like that, Huckleberry--set up straight;'' and pretty soon she would say, 'Don't gap and stretch like that, Huckleberry--why don't you try to behave?'' Then she told me all about the bad place, and I said I wished I was there. She got mad then, but I didn't mean no harm. All I wanted was to go somewheres; all I wanted was a change, I warn't particular. She said it was wicked to say what I said; said she wouldn't say it for the whole world; she was going to live so as to go to the good place. Well, I couldn't see no advantage in going where she was going, so I made up my mind I wouldn't try for it. But I never said so, because it would only make trouble, and wouldn't do no good.",
     submittedBy: "steven"
   },
 ];

@@ -1,0 +1,48 @@
+  <div class="container" id="navbar-margin">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="well">
+              <h2 class="text-center"><strong>Proofread-a-Story</strong></h2>
+              <hr>
+              <h3><strong>Directions:</strong>  Find the misspelled words in the passage.  Type the correct spelling in the box below.  For hints, use the button at the bottom to play the passage and listen for words that are incorrect.</h3>
+              <form>
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="wordToCheck" placeholder="Correct the spelling of a word...">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-block btn-warning" ng-click="checkWord()" value="Submit">
+                </div>
+              </form>
+              <h2 class="text-left"><strong>Results:</strong></h2>
+              <h3>Misspelled Words Left: {{ totalQuestions - attempts.correct.length }}</h3>
+              <h3>Correct: {{ attempts.correct.length }}</h3>
+              <h3>Incorrect: {{ attempts.incorrect }}</h3>
+              <!-- {{correctSpellings}} -->
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <h1>{{ passage.title }}</h1>
+                <hr>
+                <h3 class="story"><div ng-bind-html="storyToProofread"></div></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div ng-show="showResponse" class="row">
+          <div class="col-md-12">
+            <h2>Modified excerpt from {{ passage.title }}</h2>
+            <h3 class="story"><div ng-bind-html="filledInStory.print"></div></h3>
+            <br>
+            <button ng-click="playStory(passage.title, filledInStory.read)" class="btn btn-block btn-warning">Hear This Story</button>
+            <button ng-click="saveResponse()" class="btn btn-block btn-warning">Save This Story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

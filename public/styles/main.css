@@ -6,6 +6,10 @@
   margin-bottom: 5px;
 }
 
+.btn {
+  font-size: 20px;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -18,12 +22,72 @@
 }
 
 .replacement {
-  color: red;
+  color: #e8931e;
   font-weight: bolder;
   text-decoration: underline;
   width: 30px;
 }
 
-h3.story {
+.corrected {
+  color: #e8931e;
+  font-weight: bolder;
+  text-decoration: underline;
+  width: 30px;  
+}
+
+.story {
   line-height: 150%;
+}
+
+input#username {
+  border: 0;
+  padding: 0;
+}
+
+input.unscrambledWord {
+  border: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+div#background {
+  margin-top: 50px;
+  background: url("/images/greatreads.jpeg");
+  background-size: cover;
+  height: 500px;
+  color: white;
+}
+
+div#foreground {
+  width: 100%;
+  height: 500px;
+  background-color: rgba(256, 256, 256, 0.3)
+}
+
+#homeheader {
+  margin-top: 120px;
+  font-size: 70px;
+  color: #333;
+}
+
+.well {
+  border: 20px;
+  padding: 20px;
+}
+
+h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) and (max-width: 880px) {
+  #navbar-margin {
+    margin-top: 170px;
+  }
+}
+
+@media (min-width: 880px) and (max-width: 1150px) {
+  #navbar-margin {
+    margin-top: 120px;
+  }
 }

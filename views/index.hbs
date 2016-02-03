@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="badlibsApp">
+<html lang="en" ng-app="greatReadsApp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
   <!-- custom styles -->
   <link rel="stylesheet" type="text/css" href="styles/main.css">
   
-  <title>Bad-Libs</title>
+  <title>Great Reads</title>
 </head>
 <body ng-controller="MainCtrl">
   <nav class="navbar navbar-default navbar-fixed-top">
@@ -47,29 +47,50 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Bad-Libs</a>
+        <a class="navbar-brand" href="/">Great Reads</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/passages">Find-a-Story</a></li>
           <li><a href="/newpassage">Create-a-Story</a></li>
-          <li><a href="/stories">Read-a-Story</a></li>
-          <li><a href="/randomstory">Try-a-Story</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inject-a-Word <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/inject-a-word/passages">Find-a-Story</a></li>
+              <li><a href="/inject-a-word/stories">Read-a-Story</a></li>
+              <li><a href="/inject-a-word/randomstory">Try-a-Story</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Unscramble-a-Word <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/unscramble-a-word/passages">Find-a-Story</a></li>
+              <li><a href="/unscramble-a-word/randomstory">Try-a-Story</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proofread-a-Story <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/proofread-a-story/passages">Find-a-Story</a></li>
+              <li><a href="/proofread-a-story/randomstory">Try-a-Story</a></li>
+            </ul>
+          </li>
+          <!-- <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Complete-a-Story <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/complete-a-story/passages">Find-a-Story</a></li>
+              <li><a href="/complete-a-story/randomstory">Try-a-Story</a></li>
+            </ul>
+          </li> -->
+          <li><a href="/leaderboard">Leaderboard</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-          <a>Who's Libbin? <input type="text" ng-model="username", placeholder="Username" autofocus>
+          <a>Who's Playing? <input type="text" ng-model="username" id="username" placeholder="Username" autofocus>
           </a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
-  <div class="container" id="navbar-margin">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div ng-view></div>
-      </div>
-    </div>
-  </div>
+  <div ng-view></div>
 </body>
 </html>
