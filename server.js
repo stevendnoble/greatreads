@@ -24,7 +24,11 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/madlibs');
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/madlibs'
+);
 
 // API routes
 
@@ -234,6 +238,6 @@ app.get('*', function (req, res) {
 });
 
 // listen on port 3000
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('server started');
 });
