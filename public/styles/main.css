@@ -38,6 +38,11 @@ body {
   width: 30px;
 }
 
+.unscrambleReplacement {
+  color: #e8931e;
+  font-weight: bolder;
+}
+
 .corrected {
   color: #e8931e;
   font-weight: bolder;
@@ -55,31 +60,12 @@ input#username {
 }
 
 input.unscrambledWord {
+  display: inline;
+  width: 160px;
   border: 0;
-  padding: 0;
-  font-size: 20px;
+  border-bottom: 2px solid black;
 }
 
-/*div#background {
-  margin-top: 50px;
-  background: url("/images/greatreads.jpeg");
-  background-size: cover;
-  height: 500px;
-  color: white;
-}
-
-div#foreground {
-  width: 100%;
-  height: 500px;
-  background-color: rgba(256, 256, 256, 0.3)
-}*/
-
-/*#homeheader {
-  margin-top: 120px;
-  font-size: 70px;
-  color: #333;
-}
-*/
 .well {
   border: 20px;
   padding: 20px;
@@ -88,18 +74,6 @@ div#foreground {
 h4 {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-@media (min-width: 768px) and (max-width: 880px) {
-  #navbar-margin {
-    margin-top: 170px;
-  }
-}
-
-@media (min-width: 880px) and (max-width: 1150px) {
-  #navbar-margin {
-    margin-top: 120px;
-  }
 }
 
 .leader-wizard {
@@ -113,5 +87,17 @@ h4 {
   .leader-wizard {
     position: relative;
     display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 880px) {
+  #navbar-margin {
+    margin-top: 170px;
+  }
+}
+
+@media (min-width: 880px) and (max-width: 1150px) {
+  #navbar-margin {
+    margin-top: 120px;
   }
 }

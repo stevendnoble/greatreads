@@ -97,9 +97,9 @@ function buildScrambledStory (passage, words) {
   var insertion; 
   passage = passage.split(' ');
   words.forEach(function (word) {
-    insertion = "<span ng-if=\"userWords."+word.scrambledWord+"!=='"+word.word+"'\" class=\"replacement\">";
+    insertion = "<span ng-if=\"userWords."+word.scrambledWord+"!=='"+word.word+"'\" class=\"unscrambleReplacement\">";
     insertion += word.scrambledWord+" ";
-    insertion += "<input type=\"text\" class=\"unscrambleWord\" ng-model=\"userWords."+word.scrambledWord+"\" placeholder=\""+word.scrambledWord+"\"></span>";
+    insertion += "<input type=\"text\" class=\"unscrambledWord\" ng-model=\"userWords."+word.scrambledWord+"\" placeholder=\""+word.scrambledWord+"\"></span>";
     insertion += "<span ng-if=\"userWords."+word.scrambledWord+"==='"+word.word+"'\" class=\"corrected\"><strong>"+word.word+"</strong></span>";
     passage[word.wordIndex] = insertion;
   });
