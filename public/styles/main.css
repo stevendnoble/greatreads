@@ -1,3 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
+
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+}
+
 #navbar-margin {
   margin-top: 70px;
 }
@@ -93,5 +99,19 @@ h4 {
 @media (min-width: 880px) and (max-width: 1150px) {
   #navbar-margin {
     margin-top: 120px;
+  }
+}
+
+.leader-wizard {
+  position: fixed;
+  width: 400px;
+  bottom: 50px;
+  right: 0px;
+}
+
+@media (max-width: 1000px) {
+  .leader-wizard {
+    position: relative;
+    display: none;
   }
 }

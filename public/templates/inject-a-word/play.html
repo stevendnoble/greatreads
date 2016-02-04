@@ -11,11 +11,11 @@
               <br>
               <h4>Remember that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?"</h4>
               <br>
-            <form ng-submit="generateResponse()">
-              <button type="submit" class="btn btn-block btn-warning">Generate Story</button>
+              <form name="responseForm" ng-submit="generateResponse()">
+                <button type="submit" class="btn btn-block btn-warning" ng-disabled="responseForm.$invalid">Generate Story</button>
+              </div>
             </div>
-          </div>
-          <div class="col-md-8">
+            <div class="col-md-8">
               <div ng-repeat="word in injectWords">
                 <div class="row form-group">
                   <div class="col-xs-6">
@@ -24,7 +24,9 @@
                     </h3>
                   </div>
                   <div class="col-xs-6">
-                    <h3 class="no-margin"><input type="text" class="underline" ng-model="word.newWord"></h3>
+                    <h3 class="no-margin">
+                      <input type="text" name="{{word.newWord}}" class="underline" ng-model="word.newWord" required>
+                    </h3>
                   </div>
                 </div>
               </div>      
@@ -40,26 +42,26 @@
                 <h3><strong>Directions:</strong></h3>
                 <h4>To hear your story, choose a voice from the following list, then click the play button.</h4>
                 <form>
-                  <label>
-                    <h4>
+                  <h4>
+                    <label>
                       <input type="radio" ng-model="voice" value="UK English Female">&nbsp;UK English Female
-                    </h4>
-                  </label>
-                  <label>
-                    <h4>
+                    </label>
+                  </h4>
+                  <h4>
+                    <label>
                       <input type="radio" ng-model="voice" value="UK English Male">&nbsp;UK English Male
-                    </h4>
-                  </label>
-                  <label>
-                    <h4>
+                    </label>
+                  </h4>
+                  <h4>
+                    <label>
                       <input type="radio" ng-model="voice" value="US English Female">&nbsp;US English Female
-                    </h4>
-                  </label>
-                  <label>
-                    <h4>
+                    </label>
+                  </h4>
+                  <h4>
+                    <label>
                       <input type="radio" ng-model="voice" value="Australian Female">&nbsp;Australian Female
-                    </h4>
-                  </label>
+                    </label>
+                  </h4>
                 </form>
                 <br>
                 <button ng-click="playStory(passage.title, filledInStory.read, voice)" class="btn btn-block btn-warning">Play</button>
@@ -68,7 +70,6 @@
                 <br>
                 <button ng-click="saveResponse()" class="btn btn-block btn-warning">Save This Story</button>
                 <br>
-                
               </div>
             </div>
             <div class="col-md-8">

@@ -12,7 +12,7 @@ var Passage = require('./models/passage'),
     Response = require('./models/response'),
     Score = require('./models/score');
 
-var seedPassages = require('./seeds/passages');
+var wordFunctions = require('./serverscripts/wordFunctions.js');
 
 // configure bodyParser (for receiving form data)
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +36,7 @@ mongoose.connect(
 app.get('/api/passages', function (req, res) {
   Passage.find(function (err, allPassages) {
     if (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(allPassages);
@@ -49,6 +50,7 @@ app.post('/api/passages', function (req, res) {
   newPassage.text = newPassage.text.replace(/\s\s+/g, ' ');
   newPassage.save(function (err, savedPassage) {
     if (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(savedPassage);
@@ -56,88 +58,12 @@ app.post('/api/passages', function (req, res) {
   });
 });
 
-function shuffle(array) {
-  var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
-
-function scramble (word) {
-  var scrambledWord = word.split('');
-  scrambledWord = shuffle(scrambledWord);
-  scrambledWord = scrambledWord.join('');
-  return scrambledWord;
-}
-
-function misspell (word) {
-  var option = word.length % 3;
-  // Get random letter, not the last letter of the word
-  var randLetter;
-  do {
-    randLetter = Math.floor(Math.random() * (word.length-1));
-  } while (word[randLetter] === word[randLetter+1]);
-  word = word.split('');
-  if (option === 1) {
-    // switch two letters
-    var temp = word[randLetter];
-    word[randLetter] = word[randLetter + 1];
-    word[randLetter+1] = temp;
-  } else if (option === 2) {
-    // change a letter to a different letter
-    var letterMap = {
-      a: 'ai',
-      b: 'bb',
-      c: 'k',
-      d: 's',
-      e: 'i',
-      f: 'th',
-      g: 'gg',
-      h: 'g',
-      i: 'e',
-      j: 'g',
-      k: 'c',
-      l: 'll',
-      m: 'n',
-      n: 'm',
-      o: 'u',
-      p: 'pp',
-      q: 'c',
-      r: 't',
-      s: 'c',
-      t: 'tt',
-      u: 'o',
-      v: 'w',
-      w: 'v',
-      x: 'z',
-      y: 'ie',
-      z: 's'
-    };
-    word[randLetter] = letterMap[word[randLetter]];
-  } else {
-    // eliminate a letter
-    word.splice(randLetter, 1);
-  }
-  return word.join('');
-}
-
-var ACCEPTABLE_POS = ['CD', 'IN', 'JJ', 'JJR', 'JJS', 'NN', 'NNP', 'NNPS', 'NNS', 'PP$', 'PRP', 'RB', 'RBR', 'RBS', 'UH', 'VB', 'VBD', 'VBG', 'VBP', 'VBZ'];
-
 app.get('/api/passages/:id', function (req, res) {
   var passageId = req.params.id;
   var result = {};
   Passage.findOne({ _id: passageId }, function (err, foundPassage) {
     if (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       // POS
@@ -148,7 +74,7 @@ app.get('/api/passages/:id', function (req, res) {
       result.totalQuestions = tenPercentOfWords;
       // Create a range from 0 to words.length-1
       var range = Array.apply(null, Array(words.length)).map(function (_, i) {return i;});
-      shuffledRange = shuffle(range);
+      shuffledRange = wordFunctions.shuffle(range);
       // Build injectWords: Display only those words which we want in Inject-a-Word
       var tagger = new pos.Tagger();
       var wordTag, testWord;
@@ -158,7 +84,7 @@ app.get('/api/passages/:id', function (req, res) {
         testWord = words[shuffledRange[index]];
         if((/^[a-zA-Z]+$/.test(testWord)) && testWord.length > 3) {
           wordTag = tagger.tag([testWord])[0][1];
-          if(ACCEPTABLE_POS.indexOf(wordTag) !== -1) {
+          if(wordFunctions.ACCEPTABLE_POS.indexOf(wordTag) !== -1) {
             result.injectWords.push({ wordIndex: shuffledRange[index], word: testWord, tag: wordTag });
           }
         }
@@ -170,7 +96,7 @@ app.get('/api/passages/:id', function (req, res) {
       while (result.unscrambleWords.length < tenPercentOfWords && index < words.length-1) {
         testWord = words[shuffledRange[index]];
         if((/^[a-zA-Z]+$/.test(testWord)) && testWord.length > 3) {
-          result.unscrambleWords.push({ wordIndex: shuffledRange[index], word: testWord, scrambledWord: scramble(testWord) });
+          result.unscrambleWords.push({ wordIndex: shuffledRange[index], word: testWord, scrambledWord: wordFunctions.scramble(testWord) });
         }
         index++;
       }
@@ -182,7 +108,7 @@ app.get('/api/passages/:id', function (req, res) {
         testWord = words[shuffledRange[index]];
         if((/^[a-zA-Z]+$/.test(testWord)) && testWord.length > 3) {
           if(testArray.indexOf(testWord) === -1) {
-            result.misspelledWords.push({ wordIndex: shuffledRange[index], word: testWord, misspelledWord: misspell(testWord) });
+            result.misspelledWords.push({ wordIndex: shuffledRange[index], word: testWord, misspelledWord: wordFunctions.misspell(testWord) });
             testArray.push(testWord);
           }
         }
@@ -199,6 +125,7 @@ app.get('/api/responses', function (req, res) {
     .populate('passage')
     .exec(function (err, allResponses) {
       if (err) {
+        console.log(err);
         res.status(500).json({ error: err.message });
       } else {
         res.json(allResponses);
@@ -211,6 +138,7 @@ app.post('/api/responses', function (req, res) {
   var newResponse = new Response(req.body);
   newResponse.save(function (err, savedResponse) {
     if (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(savedResponse);
@@ -221,6 +149,7 @@ app.post('/api/responses', function (req, res) {
 app.get('/api/scores', function (req, res) {
   Score.find(function (err, allScores) {
       if (err) {
+        console.log(err);
         res.status(500).json({ error: err.message });
       } else {
         res.json(allScores);
@@ -232,6 +161,7 @@ app.get('/api/scores', function (req, res) {
 app.post('/api/scores', function (req, res) {
   Score.findOne({username: req.body.username}, function(err, foundScore) {
     if (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       if (foundScore) {
