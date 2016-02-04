@@ -1,40 +1,26 @@
-  <div class="container" id="navbar-margin">
-    <div class="row">
-      <div class="col-md-12">
-        <div ng-hide="showResponse" class="row">
-          <div class="col-md-4">
-            <div class="well">
-              <h2 class="text-center"><strong>Unscramble-a-Word</strong></h2>
-              <hr>
-              <h3><strong>Directions:</strong></h3>
-              <h4>Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</h4>
-              <hr>
-              <h3 class="text-left"><strong>Results:</strong></h3>
-              <h4>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</h4>
-              <h4>Correct: {{ unscrambledWords }}</h4>
-              <h4>Time: {{seconds}} seconds</h4>
-              <h4>Score: {{ score }}</h4>
-              <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <h1>{{ passage.title }}</h1>
-            <hr>
-            <h3 class="story">
-            <div id="passage"></div>
-          </div>
-        </div>
-
-
-        <div ng-show="showResponse" class="row">
-          <div class="col-md-12">
-            <h2>Modified excerpt from {{ passage.title }}</h2>
-            <h3 class="story"><div ng-bind-html="filledInStory.print"></div></h3>
-            <br>
-            <button ng-click="playStory(passage.title, filledInStory.read)" class="btn btn-block btn-warning">Hear This Story</button>
-            <button ng-click="saveResponse()" class="btn btn-block btn-warning">Save This Story</button>
-          </div>
-        </div>
+<div class="col-md-12">
+  <div ng-hide="showResponse" class="row">
+    <div class="col-md-4">
+      <div class="well">
+        <h2 class="text-center"><strong>Unscramble-a-Word</strong></h2>
+        <hr>
+        <h3><strong>Directions:</strong></h3>
+        <h4>Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</h4>
+        <hr>
+        <h3 class="text-left"><strong>Results:</strong></h3>
+        <h4>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</h4>
+        <h4>Correct: {{ unscrambledWords }}</h4>
+        <h4>Time: {{seconds}} seconds</h4>
+        <h4>Score: {{ score }}</h4>
+        <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
       </div>
     </div>
+    <div class="col-md-8">
+      <h1>{{ passage.title }}</h1>
+      <hr>
+      <h3 class="story">
+        <div id="passage"></div>
+      </h3>
+    </div>
   </div>
+</div>

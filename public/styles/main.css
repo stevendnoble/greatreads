@@ -83,20 +83,13 @@ h4 {
   right: 0px;
 }
 
-@media (max-width: 1000px) {
-  .leader-wizard {
-    position: relative;
-    display: none;
-  }
+#homepage-margin {
+  margin-top: 30px;
 }
 
 @media (min-width: 768px) and (max-width: 880px) {
   #navbar-margin {
     margin-top: 170px;
-  }
-@media (min-width: 768px) and (max-width: 880px) {
-  #homepage-margin {
-    margin-top: 200px;
   }
 }
 
@@ -104,8 +97,11 @@ h4 {
   #navbar-margin {
     margin-top: 120px;
   }
-@media (min-width: 880px) and (max-width: 1150px) {
-  #homepage-margin {
-    margin-top: 150px;
+}
+
+@media (max-width: 1000px) {
+  .leader-wizard {
+    position: relative;
+    display: none;
   }
 }

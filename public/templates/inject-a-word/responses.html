@@ -1,54 +1,50 @@
-  <div class="container" id="navbar-margin">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="well">
-              <h2 class="text-center">View Stories Others Have Created</h2>
-              <hr>
-              <h3>Search by username:</h3>
-              <input type="text" class="form-control" ng-model="search.username" placeholder="Enter the user who submitted the story">
-              <hr>
-              <h3>Search by story:</h3>
-              <input type="text" class="form-control" ng-model="search.passage.title" placeholder="Enter the title or author of the story">
-              <hr>
-              <h3>Play Passages:</h3>
-              <h4>To hear your story, choose a voice from the following list, then click the play button below the story.</h4>
-              <br>
-              <form>
-                <h4>
-                  <label>
-                    <input type="radio" ng-model="voice" value="UK English Female">&nbsp;UK English Female
-                  </label>
-                </h4>
-                <h4>
-                  <label>
-                    <input type="radio" ng-model="voice" value="UK English Male">&nbsp;UK English Male
-                  </label>
-                </h4>
-                <h4>
-                  <label>
-                    <input type="radio" ng-model="voice" value="Us English Female">&nbsp;Us English Female
-                  </label>
-                </h4>
-                <h4>
-                  <label>
-                    <input type="radio" ng-model="voice" value="Australian Female">&nbsp;Australian Female
-                  </label>
-                </h4>
-              </form>
-            </div>
-          </div>
-          <div class="col-md-8" style="overflow-y:scroll">
-            <div ng-repeat="response in responses | filter:search">
-              <h2>{{ response.passage.title }}</h2>
-              <h3 class="text-right">Submitted by: {{ response.username }}</h3>
-              <h3 class="story"><div ng-bind-html="response.filledInStory.print"></div></h3>
-              <button ng-click="playStory(response.passage.title, response.filledInStory.read, voice)" class="btn btn-block btn-warning">Hear This Story</button>
-              <hr>
-            </div>
-          </div>
-        </div>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="well">
+        <h2 class="text-center">View Stories Others Have Created</h2>
+        <hr>
+        <h3>Search by username:</h3>
+        <input type="text" class="form-control" ng-model="search.username" placeholder="Enter the user who submitted the story">
+        <hr>
+        <h3>Search by story:</h3>
+        <input type="text" class="form-control" ng-model="search.passage.title" placeholder="Enter the title or author of the story">
+        <hr>
+        <h3>Play Passages:</h3>
+        <h4>To hear your story, choose a voice from the following list, then click the play button below the story.</h4>
+        <br>
+        <form>
+          <h4>
+            <label>
+              <input type="radio" ng-model="voice" value="UK English Female">&nbsp;UK English Female
+            </label>
+          </h4>
+          <h4>
+            <label>
+              <input type="radio" ng-model="voice" value="UK English Male">&nbsp;UK English Male
+            </label>
+          </h4>
+          <h4>
+            <label>
+              <input type="radio" ng-model="voice" value="Us English Female">&nbsp;Us English Female
+            </label>
+          </h4>
+          <h4>
+            <label>
+              <input type="radio" ng-model="voice" value="Australian Female">&nbsp;Australian Female
+            </label>
+          </h4>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8" style="overflow-y:scroll">
+      <div ng-repeat="response in responses | filter:search">
+        <h2>{{ response.passage.title }}</h2>
+        <h3 class="text-right">Submitted by: {{ response.username }}</h3>
+        <h3 class="story"><div ng-bind-html="response.filledInStory.print"></div></h3>
+        <button ng-click="playStory(response.passage.title, response.filledInStory.read, voice)" class="btn btn-block btn-warning">Hear This Story</button>
+        <hr>
       </div>
     </div>
   </div>
+</div>

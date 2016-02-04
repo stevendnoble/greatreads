@@ -1,24 +1,20 @@
-  <div class="container" id="navbar-margin">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <h1>Add a Story</h1>
-            <hr>
-            <form ng-submit="savePassage()">
-              <div ng-show="username==='random user'" class="form-group">
-                <input type="text" class="form-control" ng-model="newPassage.submittedBy" placeholder="If you want credit, put in a username.">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" ng-model="newPassage.title" placeholder="Give your story a title.">
-              </div>
-              <div class="form-group">
-                <textarea id="userRatingTextarea" rows="12" class="form-control" ng-model="newPassage.text" placeholder="Tell me your story."></textarea>
-              </div>
-              <input type="submit" class="btn btn-warning btn-block" value="Submit">
-            </form>
-          </div>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Add a Story</h1>
+      <hr>
+      <form ng-submit="savePassage()">
+        <div ng-show="username==='random user'" class="form-group">
+          <input type="text" class="form-control" ng-model="newPassage.submittedBy" placeholder="If you want credit, put in a username.">
         </div>
-      </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="newPassage.title" placeholder="Give your story a title.">
+        </div>
+        <div class="form-group">
+          <textarea id="userRatingTextarea" rows="12" class="form-control" ng-model="newPassage.text" placeholder="Tell me your story."></textarea>
+        </div>
+        <input type="submit" class="btn btn-warning btn-block" value="Submit">
+      </form>
     </div>
   </div>
+</div>

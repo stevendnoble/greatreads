@@ -1,14 +1,10 @@
-<div class="container" id="navbar-margin">
+<div class="col-md-12">
+  <h1 class="text-center">Inject-a-Word</h1>
+  <h3>Click one of the buttons to choose that story to play Inject-a-Word, {{username}}.  Inject-a-Word is like the classic Mad Libs game.</h3>
+  <hr>
   <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-center">Inject-a-Word</h1>
-      <h3>Click one of the buttons to choose that story to play Inject-a-Word, {{username}}.  Inject-a-Word is like the classic Mad Libs game.</h3>
-      <hr>
-      <div class="row">
-        <div ng-repeat="passage in passages" class="col-md-6">
-          <button class="btn btn-block btn-warning btn-passage" ng-click="choosePassage(passage._id)">{{ passage.title }}</button>
-        </div>
-      </div>
+    <div ng-repeat="passage in passages" class="col-md-6">
+      <button class="btn btn-block btn-warning btn-passage" ng-click="choosePassage(passage._id)">{{ passage.title }}</button>
     </div>
   </div>
 </div>

@@ -1,40 +1,35 @@
-  <div class="container" id="navbar-margin">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="well">
-              <h2 class="text-center"><strong>Proofread-a-Story</strong></h2>
-              <hr>
-              <h3><strong>Directions:</strong></h3>
-              <h4>Find the misspelled words in the passage.  Type the correct spelling in the box below.  For hints, use the button at the bottom to play the passage and listen for words that are incorrect.</h4>  
-              <form>
-                <div class="form-group">
-                  <input type="text" class="form-control" ng-model="wordToCheck" placeholder="Correct the spelling of a word...">
-                </div>
-                <div class="form-group">
-                  <input type="submit" class="btn btn-block btn-warning" ng-click="checkWord()" value="Submit">
-                </div>
-              </form>
-              <h3 class="text-left"><strong>Results:</strong></h3>
-              <h4>Misspelled Words Left: {{ totalQuestions - attempts.correct.length }}</h4>
-              <h4>Correct: {{ attempts.correct.length }}</h4>
-              <h4>Incorrect: {{ attempts.incorrect }}</h4>
-              <h4>Score: {{ score }}</h4>
-              <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
-              <!-- {{correctSpellings}} -->
-            </div>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="well">
+        <h2 class="text-center"><strong>Proofread-a-Story</strong></h2>
+        <hr>
+        <h3><strong>Directions:</strong></h3>
+        <h4>Find the misspelled words in the passage.  Type the correct spelling in the box below.  For hints, use the button at the bottom to play the passage and listen for words that are incorrect.</h4>  
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="wordToCheck" placeholder="Correct the spelling of a word...">
           </div>
-          <div class="col-md-8">
-            <div class="row">
-              <div class="col-md-12">
-                <h1>{{ passage.title }}</h1>
-                <hr>
-                <h3 class="story"><div ng-bind-html="storyToProofread"></div></h3>
-              </div>
-            </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-block btn-warning" ng-click="checkWord()" value="Submit">
           </div>
+        </form>
+        <h3 class="text-left"><strong>Results:</strong></h3>
+        <h4>Misspelled Words Left: {{ totalQuestions - attempts.correct.length }}</h4>
+        <h4>Correct: {{ attempts.correct.length }}</h4>
+        <h4>Incorrect: {{ attempts.incorrect }}</h4>
+        <h4>Score: {{ score }}</h4>
+        <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ passage.title }}</h1>
+          <hr>
+          <h3 class="story"><div ng-bind-html="storyToProofread"></div></h3>
         </div>
       </div>
     </div>
   </div>
+</div>
