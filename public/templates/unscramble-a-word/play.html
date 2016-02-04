@@ -13,7 +13,8 @@
               <h4>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</h4>
               <h4>Correct: {{ unscrambledWords }}</h4>
               <h4>Time: {{seconds}} seconds</h4>
-              <h4>Score: {{ 3 * unscrambledWords - totalQuestions }}</h4>
+              <h4>Score: {{ score }}</h4>
+              <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
             </div>
           </div>
           <div class="col-md-8">

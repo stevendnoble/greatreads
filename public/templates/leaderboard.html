@@ -2,14 +2,18 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
+          <div class="col-md-6 col-md-offset-3 well">
             <h1 class="text-center">Leaderboard</h1>
             <hr>
-            <div class="col-md-6">
-              usernames
-            </div>
-            <div class="col-md-6">
-              scores
+            <div ng-repeat="score in scores | orderBy:'-points' | limitTo:20">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>{{score.username}}</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                  <h3>{{score.points}}</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>

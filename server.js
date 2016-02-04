@@ -9,7 +9,8 @@ var express = require('express'),
 
 // require models
 var Passage = require('./models/passage'),
-    Response = require('./models/response');
+    Response = require('./models/response'),
+    Score = require('./models/score');
 
 var seedPassages = require('./seeds/passages');
 
@@ -191,15 +192,7 @@ app.get('/api/passages/:id', function (req, res) {
       res.json(result);
     }
   });
-  // .exec(function () {
-  //   res.json(result);
-  // });
 });
-
-// app.put('/api/passages/:id', function (req, res) {
-// });
-// app.delete('/api/passages/:id', function (req, res) {
-// });
 
 app.get('/api/responses', function (req, res) {
   Response.find()
@@ -225,12 +218,34 @@ app.post('/api/responses', function (req, res) {
   });
 });
 
-// app.get('/api/responses/:id', function (req, res) {
-// });
-// app.put('/api/responses/:id', function (req, res) {
-// });
-// app.delete('/api/responses/:id', function (req, res) {
-// });
+app.get('/api/scores', function (req, res) {
+  Score.find(function (err, allScores) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(allScores);
+      }
+    }
+  );
+});
+
+app.post('/api/scores', function (req, res) {
+  Score.findOne({username: req.body.username}, function(err, foundScore) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      if (foundScore) {
+        foundScore.points += Number(req.body.points);
+        foundScore.save();
+        res.json(foundScore);
+      } else {
+        var newScore = new Score(req.body);
+        newScore.save();
+        res.json(newScore);
+      }
+    }
+  });
+});
 
 // catchall route
 app.get('*', function (req, res) {

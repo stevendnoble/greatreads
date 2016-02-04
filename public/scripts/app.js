@@ -15,7 +15,7 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/leaderboard', {
         templateUrl: 'templates/leaderboard.html',
-        controller: 'HomeCtrl'
+        controller: 'MainCtrl'
       })
       .when('/inject-a-word/passages', {
         templateUrl: 'templates/inject-a-word/index.html',
@@ -99,6 +99,10 @@ app.factory('Passage', ['$resource', function ($resource) {
 
 app.factory('Response', ['$resource', function ($resource) {
   return $resource('/api/responses/:id', { id: '@_id' });
+}]);
+
+app.factory('Score', ['$resource', function ($resource) {
+  return $resource('/api/scores/:id', { id: '@_id' });
 }]);
 
 // functions and variables
@@ -228,12 +232,18 @@ function buildStoryWithMisspellings (passage, words) {
 }
 
 // controllers
-app.controller('MainCtrl', ['$scope', function ($scope) {
+app.controller('MainCtrl', ['$scope', 'Score', function ($scope, Score) {
   $scope.username = 'random user';
+
+  $scope.scores = Score.query();
 
   $scope.playStory = function (title, story, voice) {
     var playString = title + ', ' + story;
     responsiveVoice.speak(playString, voice);
+  };
+
+  $scope.saveScore = function (username, score) {
+    Score.save ({username: username, points: score});
   };
 }]);
 
@@ -313,6 +323,9 @@ app.controller('InjectPassageShowCtrl', ['$scope', '$location', '$routeParams', 
           // Error handling
         }
       );
+      if($scope.username !== 'random user') {
+        $scope.saveScore($scope.username, 20);
+      }
     };
   }
 ]);
@@ -343,10 +356,13 @@ app.controller('UnscramblePassageShowCtrl', ['$scope', '$location', '$routeParam
     var passageId;
     $scope.userWords = {};
     $scope.unscrambledWords = 0;
+    $scope.score = 0;
+    $scope.bonus = 0;
 
     if ($routeParams.id) {
       passageId = $routeParams.id;
       Passage.get({ id: passageId }, function(data) { 
+        console.log(data);
         $scope.passage = data.passage;
         $scope.totalQuestions = data.totalQuestions;
         $scope.unscrambleWords = data.unscrambleWords;
@@ -395,15 +411,17 @@ app.controller('UnscramblePassageShowCtrl', ['$scope', '$location', '$routeParam
     $scope.checkResults = function() {
       if ($scope.unscrambledWords === $scope.totalQuestions) {
         $scope.stop();
+        $scope.bonus = Math.max(0, Math.floor(($scope.totalQuestions * 10 - $scope.seconds) / 10));
       }
       var counter = 0;
-      $scope.seconds += 1;
       for (var key in $scope.userWords) {
         if ($scope.checkWords.indexOf($scope.userWords[key]) !== -1) {
           counter += 1;
         }
       }
+      $scope.seconds += 1;
       $scope.unscrambledWords = counter;
+      $scope.score = Math.max(0, (3 * $scope.unscrambledWords - $scope.totalQuestions)) + $scope.bonus;
     };
   }
 ]);
@@ -421,6 +439,7 @@ app.controller('ProofreadPassagesCtrl', ['$scope', '$location', 'Passage',
 app.controller('ProofreadPassageShowCtrl', ['$scope', '$location', '$routeParams', '$sce', 'Passage',
   function ($scope, $location, $routeParams, $sce, Passage) {
     var passageId;
+    $scope.score = 0;
     $scope.attempts = { correct: [], incorrect: 0 };
     if ($routeParams.id) {
       passageId = $routeParams.id;
@@ -448,14 +467,15 @@ app.controller('ProofreadPassageShowCtrl', ['$scope', '$location', '$routeParams
         $scope.storyToProofread = $scope.storyToProofread.replace($scope.correctSpellings[wordToCheck], '<span class="corrected">'+wordToCheck+'</span>');
         $scope.attempts.correct.push(wordToCheck);
         delete $scope.correctSpellings[wordToCheck];
+        $scope.score = Math.max(0, ($scope.attempts.correct.length - $scope.attempts.incorrect), (3 * $scope.attempts.correct.length - $scope.totalQuestions - $scope.attempts.incorrect));
       } else {
         $scope.attempts.incorrect++;
       }
     };
 
-    $scope.deliberatelyTrustDangerousSnippet = function() {
-      return $sce.trustAsHtml($scope.storyToUnscramble);
-    };
+    // $scope.deliberatelyTrustDangerousSnippet = function() {
+    //   return $sce.trustAsHtml($scope.storyToUnscramble);
+    // };
   }
 ]);
 
