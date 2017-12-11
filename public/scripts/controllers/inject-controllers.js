@@ -6,7 +6,7 @@ InjectControllers.controller('InjectPassagesCtrl', ['$scope', '$location', 'Pass
 
     // Redirect to passage using id from the button
     $scope.choosePassage = function(id) {
-      $location.path('/inject-a-word/passages/' + id);
+      $location.path('/grammaring/passages/' + id);
     };
   }
 ]);
@@ -32,7 +32,7 @@ InjectControllers.controller('InjectPassageShowCtrl', ['$scope', '$location', '$
       Passage.query(function (passageArray) {
         var randomIndex = Math.floor(passageArray.length * Math.random());
         passageId = passageArray[randomIndex]._id;
-        $location.path('/inject-a-word/passages/' + passageId);
+        $location.path('/grammaring/passages/' + passageId);
       });
     }
 
@@ -55,9 +55,8 @@ InjectControllers.controller('InjectPassageShowCtrl', ['$scope', '$location', '$
       };
       Response.save(responseData,
         function (savedResponse) {
-          console.log($scope.username);
           if ($scope.username === 'random user' || $scope.username === '') {
-            $location.path('/inject-a-word/stories');
+            $location.path('/grammaring/stories');
           } else {
             $location.path('/leaderboard');
           }

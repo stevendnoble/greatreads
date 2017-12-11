@@ -1,0 +1,10 @@
+<div class="col-md-12">
+  <h1 class="text-center">Grammaring</h1>
+  <h2 class="h4">Click one of the buttons to choose that story to play Grammaring, {{username}}. Grammaring is like the classic Mad Libs game. You will be given a list of parts of speech. You must fill in the blanks with words for each part of speech given. Then the words will be assembled into a story. You can save the story and hear it read aloud.</h3>
+  <hr>
+  <div class="row">
+    <div ng-repeat="passage in passages" class="col-md-6">
+      <button class="btn btn-block btn-warning btn-passage" ng-click="choosePassage(passage._id)">{{ passage.title }}</button>
+    </div>
+  </div>
+</div>

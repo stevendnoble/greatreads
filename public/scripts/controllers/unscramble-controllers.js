@@ -6,7 +6,7 @@ UnscrambleControllers.controller('UnscramblePassagesCtrl', ['$scope', '$location
 
     // Redirect to passage from button press
     $scope.choosePassage = function(id) {
-      $location.path('/unscramble-a-word/passages/' + id);
+      $location.path('/unscrambling/passages/' + id);
     };
   }
 ]);
@@ -22,7 +22,6 @@ UnscrambleControllers.controller('UnscramblePassageShowCtrl', ['$scope', '$locat
     if ($routeParams.id) {
       passageId = $routeParams.id;
       Passage.get({ id: passageId }, function(data) { 
-        console.log(data);
         $scope.passage = data.passage;
         $scope.totalQuestions = data.totalQuestions;
         $scope.unscrambleWords = data.unscrambleWords;
@@ -43,7 +42,7 @@ UnscrambleControllers.controller('UnscramblePassageShowCtrl', ['$scope', '$locat
       Passage.query(function (passageArray) {
         var randomIndex = Math.floor(passageArray.length * Math.random());
         passageId = passageArray[randomIndex]._id;
-        $location.path('/unscramble-a-word/passages/' + passageId);
+        $location.path('/unscrambling/passages/' + passageId);
       });
     }
 

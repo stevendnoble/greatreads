@@ -36,7 +36,6 @@ mongoose.connect(
 app.get('/api/passages', function (req, res) {
   Passage.find(function (err, allPassages) {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(allPassages);
@@ -50,7 +49,6 @@ app.post('/api/passages', function (req, res) {
   newPassage.text = newPassage.text.replace(/\s\s+/g, ' ');
   newPassage.save(function (err, savedPassage) {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(savedPassage);
@@ -63,7 +61,6 @@ app.get('/api/passages/:id', function (req, res) {
   var result = {};
   Passage.findOne({ _id: passageId }, function (err, foundPassage) {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       // POS
@@ -75,7 +72,7 @@ app.get('/api/passages/:id', function (req, res) {
       // Create a range from 0 to words.length-1
       var range = Array.apply(null, Array(words.length)).map(function (_, i) {return i;});
       shuffledRange = wordFunctions.shuffle(range);
-      // Build injectWords: Display only those words which we want in Inject-a-Word
+      // Build injectWords: Display only those words which we want in Grammaring
       var tagger = new pos.Tagger();
       var wordTag, testWord;
       var index = 0;
@@ -125,7 +122,6 @@ app.get('/api/responses', function (req, res) {
     .populate('passage')
     .exec(function (err, allResponses) {
       if (err) {
-        console.log(err);
         res.status(500).json({ error: err.message });
       } else {
         res.json(allResponses);
@@ -138,7 +134,6 @@ app.post('/api/responses', function (req, res) {
   var newResponse = new Response(req.body);
   newResponse.save(function (err, savedResponse) {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       res.json(savedResponse);
@@ -148,20 +143,17 @@ app.post('/api/responses', function (req, res) {
 
 app.get('/api/scores', function (req, res) {
   Score.find(function (err, allScores) {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ error: err.message });
-      } else {
-        res.json(allScores);
-      }
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json(allScores);
     }
-  );
+  });
 });
 
 app.post('/api/scores', function (req, res) {
   Score.findOne({username: req.body.username}, function(err, foundScore) {
     if (err) {
-      console.log(err);
       res.status(500).json({ error: err.message });
     } else {
       if (foundScore) {

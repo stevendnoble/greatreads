@@ -25,8 +25,6 @@ MainControllers.controller('MainCtrl', ['$scope', '$location', 'Score',
 
 MainControllers.controller('HomeCtrl', ['$scope', '$location', 'Passage', 
   function ($scope, $location, Passage) {
-    $scope.homeTest = "Welcome to the homepage!";
-
     // Save a new passage from user input
     $scope.savePassage = function() {
       // Allows passage to be saved with username attached
@@ -36,7 +34,7 @@ MainControllers.controller('HomeCtrl', ['$scope', '$location', 'Passage',
       var passageData = $scope.newPassage;
       Passage.save(passageData,
         function (savedPassage) {
-          // $location.path('/inject-a-word/passages/' + savedPassage._id);
+          // $location.path('/grammaring/passages/' + savedPassage._id);
           $scope.newPassage = {};
         }
       );

@@ -39,7 +39,7 @@ CompleteControllers.controller('CompletePassageShowCtrl', ['$scope', '$location'
       Passage.query(function (passageArray) {
         var randomIndex = Math.floor(passageArray.length * Math.random());
         passageId = passageArray[randomIndex]._id;
-        $location.path('/inject-a-word/passages/' + passageId);
+        $location.path('/grammaring/passages/' + passageId);
       });
     }
 

@@ -1,30 +1,30 @@
 <div class="col-md-12">
   <div ng-hide="showResponse" class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <div class="well">
-        <h2 class="text-center"><strong>Inject-a-Word</strong></h2>
+        <h1 class="h2 text-center"><strong>Grammaring</strong></h2>
         <hr>
-        <h3><strong>Directions:</strong></h3>
-        <h4>Fill in the blanks to the right with the appropriate part of speech.  When you are finished, click the Generate Story button below to read the story with your words inserted into selected places.</h4>
+        <h2 class="h4"><strong>Directions:</strong></h3>
+        <p>Fill in the blanks to the right with the appropriate part of speech. When you are finished, click the Generate Story button below to read the story with your words inserted into selected places.</p>
         <br>
-        <h4>Remember that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?"</h4>
+        <p>Remember that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?"</p>
         <br>
         <form name="responseForm" ng-submit="generateResponse()">
           <button type="submit" class="btn btn-block btn-warning" ng-disabled="responseForm.$invalid">Generate Story</button>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-sm-8">
         <div ng-repeat="word in injectWords">
           <div class="row form-group">
             <div class="col-xs-6">
-              <h3 class="text-right no-margin">
+              <h4 class="text-right no-margin">
                 {{ word.tag.definition }}:
-              </h3>
+              </h4>
             </div>
             <div class="col-xs-6">
-              <h3 class="no-margin">
+              <h4 class="no-margin">
                 <input type="text" name="{{word.newWord}}" class="underline" ng-model="word.newWord" required>
-              </h3>
+              </h4>
             </div>
           </div>
         </div>      
@@ -35,44 +35,44 @@
     <div class="row">
       <div class="col-md-4">
         <div class="well">
-          <h2 class="text-center"><strong>Inject-a-Word</strong></h2>
+          <h1 class="h2 text-center"><strong>Grammaring</strong></h2>
           <hr>
-          <h3><strong>Directions:</strong></h3>
-          <h4>To hear your story, choose a voice from the following list, then click the play button.</h4>
+          <h2 class="h4"><strong>Directions:</strong></h3>
+          <p>To hear your story, choose a voice from the following list, then click the play button.</p>
           <form>
-            <h4>
+            <p>
               <label>
                 <input type="radio" ng-model="voice" value="UK English Female">&nbsp;UK English Female
               </label>
-            </h4>
-            <h4>
+            </p>
+            <p>
               <label>
                 <input type="radio" ng-model="voice" value="UK English Male">&nbsp;UK English Male
               </label>
-            </h4>
-            <h4>
+            </p>
+            <p>
               <label>
                 <input type="radio" ng-model="voice" value="US English Female">&nbsp;US English Female
               </label>
-            </h4>
-            <h4>
+            </p>
+            <p>
               <label>
                 <input type="radio" ng-model="voice" value="Australian Female">&nbsp;Australian Female
               </label>
-            </h4>
+            </p>
           </form>
           <br>
           <button ng-click="playStory(passage.title, filledInStory.read, voice)" class="btn btn-block btn-warning">Play</button>
           <br>
-          <h4>Remember, when you save, that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?" in the upper right corner.</h4>
+          <p>Remember, when you save, that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?" in the upper right corner.</p>
           <br>
           <button ng-click="saveResponse()" class="btn btn-block btn-warning">Save This Story</button>
           <br>
         </div>
       </div>
       <div class="col-md-8">
-        <h2>Modified excerpt from {{ passage.title }}</h2>
-        <h3 class="story"><div ng-bind-html="filledInStory.print"></div></h3>
+        <h2 class="h3">Modified excerpt from {{ passage.title }}</h2>
+        <h3 class="h4 story"><div ng-bind-html="filledInStory.print"></div></h3>
       </div>
     </div>
   </div>

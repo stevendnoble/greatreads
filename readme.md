@@ -3,9 +3,9 @@ What better way is there to practice English language skills than through games?
 
 There are currently three games in Word Wizz&#601;rd:
 
-* Inject-a-Word:  fill in the story with words using the parts of speech
-* Unscramble-a-Word:  unscramble words using context clues
-* Proofread-a-Story:  find the misspelled words
+* Grammaring:  fill in the story with words using the parts of speech
+* Unscrambling:  unscramble words using context clues
+* Proofreading:  find the misspelled words
 
 ## Technologies Used
 
@@ -33,13 +33,13 @@ In the future, I plan to add:
 
 ![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot1.png "Homepage")
 
-![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot2.png "Inject-a-Word Play")
+![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot2.png "Grammaring Play")
 
-![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot3.png "Inject-a-Word Read")
+![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot3.png "Grammaring Read")
 
-![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot4.png "Unscramble-a-Word")
+![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot4.png "Unscrambling")
 
-![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot5.png "Proofread-a-Story")
+![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot5.png "Proofreading")
 
 ![alt text](https://github.com/stevendnoble/wordwizzerd/blob/master/public/images/screenshots/screenshot6.png "Leaderboard")
 

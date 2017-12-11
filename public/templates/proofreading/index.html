@@ -1,0 +1,9 @@
+<div class="col-md-12">
+  <h1 class="text-center">Proofreading</h1>
+  <h2 class="h4">Click one of the buttons to choose that story to play Proofreading. In Proofreading, several words will be misspelled. Your goal is to identify the misspelled words and type the correct spelling.</h3><hr>
+  <div class="row">
+    <div ng-repeat="passage in passages" class="col-md-6">
+      <button class="btn btn-block btn-warning btn-passage" ng-click="choosePassage(passage._id)">{{ passage.title }}</button>
+    </div>
+  </div>
+</div>

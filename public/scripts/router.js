@@ -15,44 +15,44 @@ Router.config(['$routeProvider', '$locationProvider',
         templateUrl: 'templates/leaderboard.html',
         controller: 'MainCtrl'
       })
-      .when('/inject-a-word/passages', {
-        templateUrl: 'templates/inject-a-word/index.html',
+      .when('/grammaring/passages', {
+        templateUrl: 'templates/grammaring/index.html',
         controller: 'InjectPassagesCtrl'
       })
-      .when('/inject-a-word/passages/:id', {
-        templateUrl: 'templates/inject-a-word/play.html',
+      .when('/grammaring/passages/:id', {
+        templateUrl: 'templates/grammaring/play.html',
         controller: 'InjectPassageShowCtrl'
       })
-      .when('/inject-a-word/stories', {
-        templateUrl: 'templates/inject-a-word/responses.html',
+      .when('/grammaring/stories', {
+        templateUrl: 'templates/grammaring/responses.html',
         controller: 'InjectResponsesCtrl'
       })
-      .when('/inject-a-word/randomstory', {
-        templateUrl: 'templates/inject-a-word/play.html',
+      .when('/grammaring/randomstory', {
+        templateUrl: 'templates/grammaring/play.html',
         controller: 'InjectPassageShowCtrl'
       })
-      .when('/unscramble-a-word/passages', {
-        templateUrl: 'templates/unscramble-a-word/index.html',
+      .when('/unscrambling/passages', {
+        templateUrl: 'templates/unscrambling/index.html',
         controller: 'UnscramblePassagesCtrl'
       })
-      .when('/unscramble-a-word/passages/:id', {
-        templateUrl: 'templates/unscramble-a-word/play.html',
+      .when('/unscrambling/passages/:id', {
+        templateUrl: 'templates/unscrambling/play.html',
         controller: 'UnscramblePassageShowCtrl'
       })
-      .when('/unscramble-a-word/randomstory', {
-        templateUrl: 'templates/unscramble-a-word/play.html',
+      .when('/unscrambling/randomstory', {
+        templateUrl: 'templates/unscrambling/play.html',
         controller: 'UnscramblePassageShowCtrl'
       })
-      .when('/proofread-a-story/passages', {
-        templateUrl: 'templates/proofread-a-story/index.html',
+      .when('/proofreading/passages', {
+        templateUrl: 'templates/proofreading/index.html',
         controller: 'ProofreadPassagesCtrl'
       })
-      .when('/proofread-a-story/passages/:id', {
-        templateUrl: 'templates/proofread-a-story/play.html',
+      .when('/proofreading/passages/:id', {
+        templateUrl: 'templates/proofreading/play.html',
         controller: 'ProofreadPassageShowCtrl'
       })
-      .when('/proofread-a-story/randomstory', {
-        templateUrl: 'templates/proofread-a-story/play.html',
+      .when('/proofreading/randomstory', {
+        templateUrl: 'templates/proofreading/play.html',
         controller: 'ProofreadPassageShowCtrl'
       })
       .when('/complete-a-story/passages', {

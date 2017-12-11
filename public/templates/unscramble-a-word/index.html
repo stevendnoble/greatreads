@@ -1,9 +1,0 @@
-<div class="col-md-12">
-  <h1 class="text-center">Unscramble-a-Word</h1>
-  <h3>Click one of the buttons to choose that story to play Unscramble-a-Word, {{username}}.  In Unscrable-a-Word, several words will be taken out of the story and scrambled.  Your goal is to unscramble all of the words using context clues to help you.</h3><hr>
-  <div class="row">
-    <div ng-repeat="passage in passages" class="col-md-6">
-      <button class="btn btn-block btn-warning btn-passage" ng-click="choosePassage(passage._id)">{{ passage.title }}</button>
-    </div>
-  </div>
-</div>

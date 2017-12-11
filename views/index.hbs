@@ -59,42 +59,45 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/newpassage">Create-a-Story</a></li>
+          <!-- <li><a href="/newpassage">Create-a-Story</a></li> -->
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inject-a-Word <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Grammaring<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/inject-a-word/passages">Find-a-Story</a></li>
-              <li><a href="/inject-a-word/stories">Read-a-Story</a></li>
-              <li><a href="/inject-a-word/randomstory">Try-a-Story</a></li>
+              <li><a href="/grammaring/passages">Choose a Story</a></li>
+              <li><a href="/grammaring/randomstory">Random Story</a></li>
+              <li><a href="/grammaring/stories">Read Completed Stories</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Unscramble-a-Word <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Unscrambling <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/unscramble-a-word/passages">Find-a-Story</a></li>
-              <li><a href="/unscramble-a-word/randomstory">Try-a-Story</a></li>
+              <li><a href="/unscrambling/passages">Choose a Story</a></li>
+              <li><a href="/unscrambling/randomstory">Random Story</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proofread-a-Story <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proofreading <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/proofread-a-story/passages">Find-a-Story</a></li>
-              <li><a href="/proofread-a-story/randomstory">Try-a-Story</a></li>
+              <li><a href="/proofreading/passages">Choose a Story</a></li>
+              <li><a href="/proofreading/randomstory">Random Story</a></li>
             </ul>
           </li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Complete-a-Story <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/complete-a-story/passages">Find-a-Story</a></li>
-              <li><a href="/complete-a-story/randomstory">Try-a-Story</a></li>
+              <li><a href="/complete-a-story/passages">Choose a Story</a></li>
+              <li><a href="/complete-a-story/randomstory">Random Story</a></li>
             </ul>
           </li> -->
           <li><a href="/leaderboard">Leaderboard</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-          <a>Who's Playing? <input type="text" ng-model="username" id="username" placeholder="Username" autofocus>
-          </a></li>
+            <a>
+              <span class="whos-playing">Who's Playing?</span>
+              <input type="text" ng-model="username" id="username" placeholder="Username" autofocus>
+            </a>
+          </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>

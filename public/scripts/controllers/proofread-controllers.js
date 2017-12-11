@@ -6,7 +6,7 @@ ProofreadControllers.controller('ProofreadPassagesCtrl', ['$scope', '$location',
 
     // Redirect to passage with id from button
     $scope.choosePassage = function(id) {
-      $location.path('/proofread-a-story/passages/' + id);
+      $location.path('/proofreading/passages/' + id);
     };
   }
 ]);
@@ -36,7 +36,7 @@ ProofreadControllers.controller('ProofreadPassageShowCtrl', ['$scope', '$locatio
       Passage.query(function (passageArray) {
         var randomIndex = Math.floor(passageArray.length * Math.random());
         passageId = passageArray[randomIndex]._id;
-        $location.path('/proofread-a-story/passages/' + passageId);
+        $location.path('/proofreading/passages/' + passageId);
       });
     }
 

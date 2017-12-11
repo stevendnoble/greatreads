@@ -1,0 +1,50 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="well">
+        <h1 class="h3 text-center"><strong>View Stories Others Have Created</strong></h2>
+        <hr>
+        <h4><strong>Search by Username:</strong></h4>
+        <input type="text" class="form-control" ng-model="search.username" placeholder="Enter the username">
+        <h4><strong>Search by Story:</strong></h4>
+        <input type="text" class="form-control" ng-model="search.passage.title" placeholder="Enter the title or author">
+        <hr>
+        <h4><strong>Play Passages:</strong></h4>
+        <p>To hear your story, choose a voice from the following list, then click the play button below the story.</p>
+        <form>
+          <p>
+            <label>
+              <input type="radio" ng-model="voice" value="UK English Female">&nbsp;UK English Female
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" ng-model="voice" value="UK English Male">&nbsp;UK English Male
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" ng-model="voice" value="US English Female">&nbsp;US English Female
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="radio" ng-model="voice" value="Australian Female">&nbsp;Australian Female
+            </label>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8" style="overflow-y:scroll">
+      <div ng-repeat="response in responses | filter:search">
+        <h2 class="h3">{{ response.passage.title }}</h2>
+        <p class="text-right">Submitted by: {{ response.username }}</p>
+        <p class="story" ng-bind-html="response.filledInStory.print"></p>
+        <div class="text-right">
+          <button ng-click="playStory(response.passage.title, response.filledInStory.read, voice)" class="btn btn-sm btn-warning">Hear This Story</button>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
