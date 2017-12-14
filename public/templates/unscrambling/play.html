@@ -1,13 +1,13 @@
-<div class="col-md-12">
+<div class="col-sm-12">
   <div ng-hide="showResponse" class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <div class="well">
         <h1 class="h2 text-center"><strong>Unscrambling</strong></h2>
         <hr>
         <h2 class="h4"><strong>Directions:</strong></h3>
         <p>Fill in the boxes to the right with the appropriate part of speech.  When you are finished, click the Results button to read the story with your words inserted into selected places.</p>
         <hr>
-        <h4 class="text-left"><strong>Results:</strong></h4>
+        <h2 class="h4 text-left"><strong>Results:</strong></h4>
         <p>Scrambled Words Left: {{ totalQuestions - unscrambledWords }}</p>
         <p>Correct: {{ unscrambledWords }}</p>
         <p>Time: {{seconds}} seconds</p>
@@ -15,7 +15,7 @@
         <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <h2 class="h3">{{ passage.title }}</h2>
       <hr>
       <h4 class="story">

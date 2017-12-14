@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-sm-12">
   <div ng-hide="showResponse" class="row">
     <div class="col-sm-4">
       <div class="well">
@@ -6,11 +6,11 @@
         <hr>
         <h2 class="h4"><strong>Directions:</strong></h3>
         <p>Fill in the blanks to the right with the appropriate part of speech. When you are finished, click the Generate Story button below to read the story with your words inserted into selected places.</p>
-        <br>
+        <br class="hidden-xs">
         <p>Remember that if you want your name to be linked to the passage that you need to enter it in "Who's Playing?"</p>
-        <br>
+        <br class="hidden-xs">
         <form name="responseForm" ng-submit="generateResponse()">
-          <button type="submit" class="btn btn-block btn-warning" ng-disabled="responseForm.$invalid">Generate Story</button>
+          <button type="submit" class="btn btn-block btn-warning hidden-xs" ng-disabled="responseForm.$invalid">Generate Story</button>
         </div>
       </div>
       <div class="col-sm-8">
@@ -27,13 +27,14 @@
               </h4>
             </div>
           </div>
-        </div>      
+        </div>   
+        <button type="submit" class="btn btn-block btn-warning visible-xs" ng-disabled="responseForm.$invalid">Generate Story</button>
       </form>
     </div>
   </div>
   <div ng-show="showResponse">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-sm-4">
         <div class="well">
           <h1 class="h2 text-center"><strong>Grammaring</strong></h2>
           <hr>
@@ -70,7 +71,7 @@
           <br>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-sm-8">
         <h2 class="h3">Modified excerpt from {{ passage.title }}</h2>
         <h3 class="h4 story"><div ng-bind-html="filledInStory.print"></div></h3>
       </div>

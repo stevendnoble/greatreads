@@ -1,12 +1,12 @@
-<div class="col-md-12">
+<div class="col-sm-12">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <div class="well">
         <h1 class="h2 text-center"><strong>Proofreading</strong></h2>
         <hr>
         <h2 class="h4"><strong>Directions:</strong></h3>
         <p>Find the misspelled words in the passage. Type the correct spelling in the box below.  For hints, use the button at the bottom to play the passage and listen for words that are incorrect.</p>  
-        <form>
+        <form class="hidden-xs">
           <div class="form-group">
             <input type="text" class="form-control" ng-model="wordToCheck" placeholder="Correct the spelling of a word...">
           </div>
@@ -22,9 +22,9 @@
         <button ng-show="passage.submittedBy==='Classics'&&username!=='random user'" ng-click="saveScore(username, score)" class="btn btn-block btn-warning">Save Score</button>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8 mb-xs">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
           <h2 class="h3">{{ passage.title }}</h2>
           <hr>
           <h4 class="story"><div ng-bind-html="storyToProofread"></div></h4>
@@ -33,3 +33,17 @@
     </div>
   </div>
 </div>
+<form class="visible-xs">
+  <div class="row fixed-bottom">
+    <div class="col-xs-9">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="wordToCheck" placeholder="Correct the spelling...">
+      </div>
+    </div>
+    <div class="col-xs-3 pl0">
+      <div class="form-group">
+        <input type="submit" class="btn btn-block btn-warning" ng-click="checkWord()" value="Go">
+      </div>
+    </div>
+  </div>
+</form>

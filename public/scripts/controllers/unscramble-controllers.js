@@ -18,6 +18,8 @@ UnscrambleControllers.controller('UnscramblePassageShowCtrl', ['$scope', '$locat
     $scope.unscrambledWords = 0;
     $scope.score = 0;
     $scope.bonus = 0;
+    $scope.seconds = 0;
+
     // If id is given, get passage from database
     if ($routeParams.id) {
       passageId = $routeParams.id;
@@ -26,8 +28,7 @@ UnscrambleControllers.controller('UnscramblePassageShowCtrl', ['$scope', '$locat
         $scope.totalQuestions = data.totalQuestions;
         $scope.unscrambleWords = data.unscrambleWords;
         // Start the timer
-        $scope.seconds = 0;
-        $scope.start();
+        $scope.timer = $interval($scope.checkResults, 1000);
         // Create array of words to check against
         $scope.checkWords = [];
         data.unscrambleWords.forEach(function(item) {
@@ -59,37 +60,35 @@ UnscrambleControllers.controller('UnscramblePassageShowCtrl', ['$scope', '$locat
     };
 
     // Timer code
-    $scope.Timer = null;
-    $scope.start = function() {
-      $scope.Timer = $interval(function () {
-        $scope.checkResults();
-      }, 1000);
-    };
     $scope.stop = function() {
-      if ($scope.Timer) {
-        $interval.cancel($scope.Timer);
+      if ($scope.timer) {
+        $interval.cancel($scope.timer);
       }
+    };
+
+    $scope.calculateUnscrambledWords = function() {
+      for (var key in $scope.userWords) {
+        if ($scope.checkWords.indexOf($scope.userWords[key]) !== -1) {
+          $scope.unscrambledWords += 1;
+        }
+      }
+    };
+
+    $scope.calculateScore = function() {
+      // Score = (0 or 3xwords - total) + bonus
+      $scope.bonus = Math.max(0, Math.floor(($scope.totalQuestions * 10 - $scope.seconds) / 10));
+      $scope.score = Math.max(0, (3 * $scope.unscrambledWords - $scope.totalQuestions)) + $scope.bonus;
     };
 
     // Check results every second
     $scope.checkResults = function() {
-      // If user has unscrambled all the words, stop the timer and calculate bonus score
+      $scope.calculateUnscrambledWords();
       if ($scope.unscrambledWords === $scope.totalQuestions) {
         $scope.stop();
-        $scope.bonus = Math.max(0, Math.floor(($scope.totalQuestions * 10 - $scope.seconds) / 10));
+        $scope.calculateScore();
+      } else {
+        $scope.seconds += 1;
       }
-      // Calculate how many words the user has answered correctly every second
-      var counter = 0;
-      for (var key in $scope.userWords) {
-        if ($scope.checkWords.indexOf($scope.userWords[key]) !== -1) {
-          counter += 1;
-        }
-      }
-      $scope.unscrambledWords = counter;
-      // Increment the timer
-      $scope.seconds += 1;
-      // Score = (0 or 3xwords - total) + bonus
-      $scope.score = Math.max(0, (3 * $scope.unscrambledWords - $scope.totalQuestions)) + $scope.bonus;
     };
   }
 ]);
